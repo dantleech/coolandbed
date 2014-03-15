@@ -25,6 +25,7 @@ class PageAdmin extends Admin
             ->with('form.group_general')
             ->add('title', 'text')
             ->add('content', 'textarea')
+            ->add('menuClass', 'text')
         ->end();
     }
 

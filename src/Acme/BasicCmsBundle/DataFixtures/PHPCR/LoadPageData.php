@@ -19,23 +19,19 @@ class LoadPageData implements FixtureInterface
         $rootPage->setParent($parent);
         $dm->persist($rootPage);
 
-        $page = new Page();
-        $page->setTitle('Home');
-        $page->setParent($rootPage);
-        $page->setContent(<<<HERE
+        foreach (array(
+            'Dormir', 'Reserver', 'Venir', 'Bouger', 'Visiter', 'Galerie'
+        ) as $title) {
+            $page = new Page();
+            $page->setTitle($title);
+            $page->setParent($rootPage);
+            $page->setContent(<<<HERE
 Welcome to the homepage of this really basic CMS.
 HERE
         );
-        $dm->persist($page);
-
-        $page = new Page();
-        $page->setTitle('About');
-        $page->setParent($rootPage);
-        $page->setContent(<<<HERE
-This page explains what its all about.
-HERE
-        );
-        $dm->persist($page);
+            $page->setMenuClass('menu-' . strtolower($title));
+            $dm->persist($page);
+        }
 
         $dm->flush();
     }

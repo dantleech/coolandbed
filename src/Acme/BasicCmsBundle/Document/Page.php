@@ -18,9 +18,19 @@ class Page implements RouteReferrersReadInterface, NodeInterface
      */
     protected $children;
 
+    /**
+     * @PHPCR\String()
+     */
+    protected $menuClass = '';
+
     public function getName()
     {
         return $this->title;
+    }
+
+    public function getRouteTitle()
+    {
+        return sprintf('%s.html', $this->getTitle());
     }
 
     public function getChildren()
@@ -34,11 +44,26 @@ class Page implements RouteReferrersReadInterface, NodeInterface
             'label' => $this->title,
             'content' => $this,
 
-            'attributes'         => array(),
+            'attributes'         => array(
+                'class' => 'image-rollover menu-item',
+            ),
             'childrenAttributes' => array(),
             'displayChildren'    => true,
-            'linkAttributes'     => array(),
+            'linkAttributes'     => array(
+                'class' => $this->menuClass,
+            ),
             'labelAttributes'    => array(),
         );
     }
+
+    public function getMenuClass() 
+    {
+        return $this->menuClass;
+    }
+    
+    public function setMenuClass($menuClass)
+    {
+        $this->menuClass = $menuClass;
+    }
+    
 }

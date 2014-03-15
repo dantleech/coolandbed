@@ -18,6 +18,13 @@ class DefaultController extends Controller
         );
     }
 
+    /**
+     * @Route(
+     *   name="make_homepage",
+     *   pattern="/_cms/make_homepage/{id}",
+     *   requirements={"id": ".+"}
+     * )
+     */
     public function makeHomepageAction($id)
     {
         $dm = $this->get('doctrine_phpcr')->getManager();

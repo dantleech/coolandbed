@@ -16,10 +16,12 @@ class SiteInitializer implements InitializerInterface
 
     public function init(ManagerRegistry $registry)
     {
+        $session = $registry->getConnection();
         // create the 'cms', 'pages', and 'posts' nodes
         NodeHelper::createPath($session, '/cms/pages');
         NodeHelper::createPath($session, '/cms/posts');
         NodeHelper::createPath($session, '/cms/routes');
+        NodeHelper::createPath($session, '/cms/media');
         $session->save();
 
         // map a document to the 'cms' node
